@@ -15,7 +15,12 @@ _init_kubech () {
 
 if [[ -f $KUBECONFIG ]]; then
   cp "$KUBECONFIG" "$KUBE_SESSION_CONFIG"
-  trap 'rm '"$KUBE_SESSION_CONFIG"'' EXIT
+
+  # https://stackoverflow.com/a/22794374/11054476
+  zshexit() {
+    rm "$KUBE_SESSION_CONFIG"
+  }
+
   export KUBECONFIG="$KUBE_SESSION_CONFIG"
 else
   cat <<EOF > /dev/stderr
