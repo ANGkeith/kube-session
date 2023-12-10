@@ -36,3 +36,6 @@ EOF
 _kube-session_deactivate() {
   export KUBECONFIG=$KUBE_SESSION_ORIGINAL_KUBECONFIG
 }
+
+alias ks="_kube-session_activate"
+alias ks!="_kube-session_deactivate"
