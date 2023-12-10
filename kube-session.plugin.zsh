@@ -15,7 +15,7 @@ _init_kubech() {
 
 _kube-session_activate() {
   if [[ -f $KUBECONFIG ]]; then
-    cp "$KUBECONFIG" "$KUBE_SESSION_CONFIG"
+    cp -n "$KUBECONFIG" "$KUBE_SESSION_CONFIG" 2>/dev/null
 
     # https://stackoverflow.com/a/22794374/11054476
     zshexit() {
