@@ -9,6 +9,9 @@ _init_kubech() {
     mkdir -p "$KUBECONFIG_SESSION_DIR"
     chmod 744 "$KUBECONFIG_SESSION_DIR"
     setfacl -d -m u::rwx,g::---,o::--- "$KUBECONFIG_SESSION_DIR"
+  else
+    # Delete files modified more than 7 days ago
+    find "$KUBECONFIG_SESSION_DIR" -type f -mtime +7 -exec rm {} \;
   fi
   unset -f _init_kubech
 } && _init_kubech
