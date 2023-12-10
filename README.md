@@ -1,9 +1,7 @@
 # Kube Session
 
-This plugin will transparently change the default behavior of `kubectl`.
-
-The context of `kubectl` will be scoped to each shell session, instead of the
-default globally shared context.
+This plugin defines helper function to use a temporary kubeconfig for the current
+shell session, instead of the default globally shared context.
 
 NOTE: Any write operations to this temporary kubeconfig file will be discarded,
 if we want to persist the data, we'll need to write to the globally shared

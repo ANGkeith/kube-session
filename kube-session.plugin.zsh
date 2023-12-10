@@ -13,23 +13,26 @@ _init_kubech() {
   unset -f _init_kubech
 } && _init_kubech
 
-if [[ -f $KUBECONFIG ]]; then
-  cp "$KUBECONFIG" "$KUBE_SESSION_CONFIG"
+_kube-session_activate() {
+  if [[ -f $KUBECONFIG ]]; then
+    cp "$KUBECONFIG" "$KUBE_SESSION_CONFIG"
 
-  # https://stackoverflow.com/a/22794374/11054476
-  zshexit() {
-    rm "$KUBE_SESSION_CONFIG"
-  }
+    # https://stackoverflow.com/a/22794374/11054476
+    zshexit() {
+      # shellcheck disable=SC2317
+      rm "$KUBE_SESSION_CONFIG"
+    }
 
-  export KUBECONFIG="$KUBE_SESSION_CONFIG"
-else
-  cat <<EOF >/dev/stderr
+    export KUBECONFIG="$KUBE_SESSION_CONFIG"
+  else
+    cat <<EOF >/dev/stderr
 error: \`$KUBECONFIG\` does not exists
   - Make sure that \$KUBECONFIG is exported before sourcing this snippet
   - Make sure that \`$KUBECONFIG\` exists
 EOF
-fi
+  fi
+}
 
-kube-session-use-global() {
+_kube-session_deactivate() {
   export KUBECONFIG=$KUBE_SESSION_ORIGINAL_KUBECONFIG
 }
