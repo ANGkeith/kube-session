@@ -1,5 +1,7 @@
 # Kube Session
 
+![Preview](https://i.imgur.com/xFXqxW7.gif)
+
 This plugin defines helper function to use a temporary kubeconfig for the current
 shell session, instead of the default globally shared context.
 
