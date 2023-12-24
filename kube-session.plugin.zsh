@@ -2,8 +2,6 @@ KUBECONFIG=${KUBECONFIG:-$HOME/.kube/config}
 KUBECONFIG_SESSION_DIR="${XDG_STATE_HOME:-$HOME/.kube}/kubech"
 KUBE_SESSION_CONFIG="$KUBECONFIG_SESSION_DIR/$$-config"
 
-KUBE_SESSION_ORIGINAL_KUBECONFIG="$KUBECONFIG"
-
 _init_kubech() {
   if [[ ! -d $KUBECONFIG_SESSION_DIR ]]; then
     mkdir -p "$KUBECONFIG_SESSION_DIR"
@@ -36,9 +34,4 @@ EOF
   fi
 }
 
-_kube-session_deactivate() {
-  export KUBECONFIG=$KUBE_SESSION_ORIGINAL_KUBECONFIG
-}
-
 alias ks="_kube-session_activate"
-alias ks!="_kube-session_deactivate"
